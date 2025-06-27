@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(90deg,rgba(41, 39, 39, 1) 0%, rgba(13, 44, 66, 1) 79%, rgba(8, 43, 43, 1) 100%);
+}
