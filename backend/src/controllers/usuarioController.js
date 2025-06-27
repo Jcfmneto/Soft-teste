@@ -1,15 +1,19 @@
-import {registraUsuario} from "../services/usuarioServices.js";
-import {login} from "../services/usuarioServices.js";
+import {registraUsuario, login} from "../services/usuarioServices.js";
+
 
 
 export const criarUsuario = async (req, res) => {
   try{
     const novoUsuario = await registraUsuario(req.body);
-    res.status(201).json(novoUsuario);
+    res.status(201).json({
+      id: novoUsuario.id,
+      nome: novoUsuario.nome,
+      email: novoUsuario.email
+    });
   }catch (error){
     res.status(400).json({error: error.message});
   }
-};
+};;
 
 export const loginUsuario = async (req, res) => {
   try{

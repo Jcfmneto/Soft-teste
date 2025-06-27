@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
+const { sign } = jwt;
 const prisma = new PrismaClient();
 
 export const registraUsuario = async ({ nome, email, senha }) => {

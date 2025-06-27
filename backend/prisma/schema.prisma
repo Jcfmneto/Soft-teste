@@ -12,4 +12,24 @@ id Int @id @default(autoincrement())
 nome String 
 email String @unique
 senha String 
+alugueis Aluguel[]
+}
+
+model Livro {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  autor     String
+  descricao String
+  alugado   Boolean  @default(false)
+  alugueis  Aluguel[]
+}
+
+model Aluguel {
+  id        Int      @id @default(autoincrement())
+  livro     Livro    @relation(fields: [livroId], references: [id])
+  livroId   Int
+  usuario   User  @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
+  dataAluguel DateTime @default(now())
+  dataDevolucao DateTime?
 }
