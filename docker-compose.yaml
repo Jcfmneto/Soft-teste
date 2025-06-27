@@ -1,4 +1,16 @@
 services:
+  backend:
+    build: ./backend           
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgresdb
+    environment:
+      DATABASE_URL: "postgres://postgres:postgres@postgresdb:5432/Soft"
+      TOKEN_SECRET: "5ebe2294ecd0e0f08eab7690d2a6ee69"
+    volumes:
+      - ./backend:/app
+    command: ["node", "src/index.js"]
 
   postgresdb:
     image: postgres:latest
