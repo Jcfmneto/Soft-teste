@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaSearch, FaBook, FaPen } from "react-icons/fa";
 import api from "../services/api";
 import "./style.css";
 
@@ -50,8 +51,8 @@ export default function VerLivrosPage() {
       console.error(err);
       alert("Erro ao devolver livro.");
     }
-  };
 
+  };
   const toggleDescricao = (id) => {
     setDescricaoVisivel((prev) => ({
       ...prev,
@@ -131,10 +132,23 @@ export default function VerLivrosPage() {
           ) : (
             livrosFiltrados.map((livro) => (
               <div key={livro.id} className="book-card">
-                <h3 className="titulo-livro">{livro.titulo}</h3>
+                <div className="titulo-linha">
+                  <h3 className="titulo-livro">{livro.titulo}</h3>
+                  <button
+                    className="btn-lupa"
+                    onClick={() => toggleDescricao(livro.id)}
+                    title={descricaoVisivel[livro.id] ? "Ver menos" : "Ver mais"}
+                  >
+                    <FaSearch />
+                  </button>
+                </div>
                 <p><strong>Autor:</strong> {livro.autor}</p>
-                <p><strong>Status:</strong> {livro.alugado ? "Alugado" : "Disponível"}</p>
-
+                <p>
+                  <strong>Status:</strong>{" "}
+                  <span className={livro.alugado ? "status-alugado" : "status-disponivel"}>
+                    {livro.alugado ? "Alugado" : "Disponível"}
+                  </span>
+                </p>
                 {descricaoVisivel[livro.id] && (
                   <p><strong>Descrição:</strong> {livro.descricao}</p>
                 )}
@@ -148,14 +162,8 @@ export default function VerLivrosPage() {
                         : alugarLivro(livro.id)
                     }
                   >
-                    📖 {livro.alugado ? "Devolver" : "Alugar"}
-                  </button>
-
-                  <button
-                    className="btn-vermais"
-                    onClick={() => toggleDescricao(livro.id)}
-                  >
-                    {descricaoVisivel[livro.id] ? "Ver menos" : "Ver mais"}
+                    <FaBook />
+                    {livro.alugado ? "Devolver" : "Alugar"}
                   </button>
 
                   <button
@@ -168,7 +176,8 @@ export default function VerLivrosPage() {
                       }
                     }}
                   >
-                    ✏️ Editar
+                    <FaPen />
+              Editar
                   </button>
                 </div>
               </div>
@@ -212,15 +221,22 @@ export default function VerLivrosPage() {
 
               <div className="modal-buttons">
                 <button type="submit">Salvar</button>
-                <button type="button" onClick={() => setLivroParaEditar(null)}>Cancelar</button>
-                <button type="button" className="btn-delete" onClick={handleDeleteLivro}>
-  Deletar
+                <button type="button" onClick={() => setLivroParaEditar(null)}>
+            Cancelar
+                </button>
+                <button
+                  type="button"
+                  className="btn-delete"
+                  onClick={handleDeleteLivro}
+                >
+            Deletar
                 </button>
               </div>
             </form>
           </div>
         </div>
       )}
+
     </div>
   );
 }
