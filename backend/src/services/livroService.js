@@ -2,11 +2,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const listarLivros = async (filtro) => {
-  const where = filtro ? {
+export const listarLivros = async (nome) => {
+  const where = nome ? {
     OR: [
-      { titulo: { contains: filtro, mode: "insensitive" } },
-      { autor: { contains: filtro, mode: "insensitive" } },
+      { titulo: { contains: nome, mode: "insensitive" } },
+      { autor: { contains: nome, mode: "insensitive" } },
     ]
   } : {};
 

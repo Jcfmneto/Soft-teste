@@ -16,7 +16,7 @@ function Login() {
       const token = TokenJWT.data?.accessToken;
 
       if (token) {
-        localStorage.setItem("token", token);
+        sessionStorage.setItem("token", token);
       }
     } catch (error) {
       console.error("Erro no login:", error.response?.data || error.message);
