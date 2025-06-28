@@ -3,11 +3,12 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import AdicionaLivro from "./pages/AdicionarLivros";
 import PrivateRoute from "./components/privateRoute.jsx";
+import NotFound from "./pages/notFound/notFound.jsx";
 
 function App() {
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route
         path="/home"
         element={
@@ -17,6 +18,7 @@ function App() {
         }
       />
       <Route path="/AdicionarLivros" element={<PrivateRoute> <AdicionaLivro /> </PrivateRoute>} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
