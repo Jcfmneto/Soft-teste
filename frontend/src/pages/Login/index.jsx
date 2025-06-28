@@ -1,10 +1,12 @@
 import "./style.css";
 import api from "../services/api.js";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const inputEmail = useRef();
   const inputSenha = useRef();
+  const navigate = useNavigate();
 
   async function loginUsuario() {
     try {
@@ -17,6 +19,7 @@ function Login() {
 
       if (token) {
         sessionStorage.setItem("token", token);
+        navigate("/home");
       }
     } catch (error) {
       console.error("Erro no login:", error.response?.data || error.message);
