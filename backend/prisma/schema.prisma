@@ -22,12 +22,12 @@ model Livro {
   autor     String
   descricao String
   alugado   Boolean  @default(false)
-  alugueis  Aluguel[]
+  alugueis  Aluguel[] 
 }
 
 model Aluguel {
   id        Int      @id @default(autoincrement())
-  livro     Livro    @relation(fields: [livroId], references: [id])
+  livro     Livro     @relation(fields: [livroId], references: [id], onDelete: Cascade)
   livroId   Int
   usuario   User  @relation(fields: [usuarioId], references: [id])
   usuarioId Int

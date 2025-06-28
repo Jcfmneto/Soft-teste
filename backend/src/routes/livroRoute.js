@@ -4,8 +4,7 @@ import {
   buscarLivroController,
   criarLivroController,
   atualizarLivroController,
-  deletarLivroController,
-  alugarLivroController,
+  deletarLivroController
 } from "../controllers/livroController.js";
 
 import { authMiddleware } from "../middlewares/autenticado.js";
@@ -19,6 +18,5 @@ router.get("/:id", buscarLivroController);
 router.post("/", criarLivroController);
 router.put("/:id", atualizarLivroController);
 router.delete("/:id", deletarLivroController);
-router.post("/:id/alugar", alugarLivroController);
 
 export default router;

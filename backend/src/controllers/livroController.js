@@ -4,7 +4,6 @@ import {
   criarLivro,
   atualizarLivro,
   deletarLivro,
-  alugarLivro
 } from "../services/livroService.js";
 
 export const listarLivrosController = async (req, res) => {
@@ -49,15 +48,6 @@ export const deletarLivroController = async (req, res) => {
   try {
     await deletarLivro(req.params.id);
     res.status(204).send();
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-export const alugarLivroController = async (req, res) => {
-  try {
-    const livroAlugado = await alugarLivro(req.params.id);
-    res.json(livroAlugado);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
