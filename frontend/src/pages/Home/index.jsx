@@ -73,7 +73,6 @@ export default function VerLivrosPage() {
     try {
       await api.put(`/livros/${livroParaEditar.id}`, formEdit);
       alert("Livro atualizado com sucesso!");
-
       setLivros((prev) =>
         prev.map((livro) =>
           livro.id === livroParaEditar.id
@@ -81,11 +80,24 @@ export default function VerLivrosPage() {
             : livro
         )
       );
-
       setLivroParaEditar(null);
     } catch (err) {
       console.error(err);
       alert("Erro ao atualizar livro.");
+    }
+  };
+
+  const handleDeleteLivro = async () => {
+    if (!window.confirm("Tem certeza que deseja deletar este livro?")) return;
+
+    try {
+      await api.delete(`/livros/${livroParaEditar.id}`);
+      alert("Livro deletado com sucesso!");
+      setLivros((prev) => prev.filter((livro) => livro.id !== livroParaEditar.id));
+      setLivroParaEditar(null);
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao deletar livro.");
     }
   };
 
@@ -201,6 +213,9 @@ export default function VerLivrosPage() {
               <div className="modal-buttons">
                 <button type="submit">Salvar</button>
                 <button type="button" onClick={() => setLivroParaEditar(null)}>Cancelar</button>
+                <button type="button" className="btn-delete" onClick={handleDeleteLivro}>
+  Deletar
+                </button>
               </div>
             </form>
           </div>

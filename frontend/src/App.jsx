@@ -7,7 +7,7 @@ import PrivateRoute from "./components/privateRoute.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="login" element={<Login />} />
       <Route
         path="/home"
         element={
