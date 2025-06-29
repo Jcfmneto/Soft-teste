@@ -20,7 +20,7 @@ CREATE TABLE "Aluguel" (
 );
 
 -- AddForeignKey
-ALTER TABLE "Aluguel" ADD CONSTRAINT "Aluguel_livroId_fkey" FOREIGN KEY ("livroId") REFERENCES "Livro"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Aluguel" ADD CONSTRAINT "Aluguel_livroId_fkey" FOREIGN KEY ("livroId") REFERENCES "Livro"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Aluguel" ADD CONSTRAINT "Aluguel_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Aluguel" ADD CONSTRAINT "Aluguel_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
