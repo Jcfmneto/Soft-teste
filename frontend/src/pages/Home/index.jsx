@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaSearch, FaBook, FaPen } from "react-icons/fa";
 import api from "../services/api";
 import "./style.css";
+import { toast } from "react-toastify";
 
 export default function VerLivrosPage() {
   const [livros, setLivros] = useState([]);
@@ -17,7 +18,7 @@ export default function VerLivrosPage() {
         setLivros(response.data);
       } catch (err) {
         console.error("Erro ao buscar livros:", err);
-        alert("Erro ao carregar livros.");
+        toast.error("Erro ao carregar livros.");
       }
     };
     fetchLivros();
@@ -26,7 +27,7 @@ export default function VerLivrosPage() {
   const alugarLivro = async (id) => {
     try {
       await api.post(`/alugueis/${id}/alugar`);
-      alert("Livro alugado com sucesso!");
+      toast.success("Livro alugado com sucesso!");
       setLivros((prev) =>
         prev.map((livro) =>
           livro.id === id ? { ...livro, alugado: true } : livro
@@ -34,14 +35,14 @@ export default function VerLivrosPage() {
       );
     } catch (err) {
       console.error(err);
-      alert("Erro ao alugar livro.");
+      toast.error("Erro ao alugar livro.");
     }
   };
 
   const devolverLivro = async (id) => {
     try {
       await api.post(`/alugueis/${id}/devolver`);
-      alert("Livro devolvido com sucesso!");
+      toast.success("Livro devolvido com sucesso!");
       setLivros((prev) =>
         prev.map((livro) =>
           livro.id === id ? { ...livro, alugado: false } : livro
@@ -49,10 +50,10 @@ export default function VerLivrosPage() {
       );
     } catch (err) {
       console.error(err);
-      alert("Erro ao devolver livro.");
+      toast.error("Erro ao devolver livro.");
     }
-
   };
+
   const toggleDescricao = (id) => {
     setDescricaoVisivel((prev) => ({
       ...prev,
@@ -61,6 +62,10 @@ export default function VerLivrosPage() {
   };
 
   const abrirModalEdicao = (livro) => {
+    if (livro.alugado) {
+      toast.error("Não é possível editar um livro que está alugado.");
+      return;
+    }
     setLivroParaEditar(livro);
     setFormEdit({
       titulo: livro.titulo,
@@ -73,7 +78,7 @@ export default function VerLivrosPage() {
     e.preventDefault();
     try {
       await api.put(`/livros/${livroParaEditar.id}`, formEdit);
-      alert("Livro atualizado com sucesso!");
+      toast.success("Livro atualizado com sucesso!");
       setLivros((prev) =>
         prev.map((livro) =>
           livro.id === livroParaEditar.id
@@ -84,21 +89,22 @@ export default function VerLivrosPage() {
       setLivroParaEditar(null);
     } catch (err) {
       console.error(err);
-      alert("Erro ao atualizar livro.");
+      toast.error("Erro ao atualizar livro.");
     }
   };
 
   const handleDeleteLivro = async () => {
-    if (!window.confirm("Tem certeza que deseja deletar este livro?")) return;
+    const confirmado = window.confirm("Tem certeza que deseja deletar este livro?");
+    if (!confirmado) return;
 
     try {
       await api.delete(`/livros/${livroParaEditar.id}`);
-      alert("Livro deletado com sucesso!");
+      toast.success("Livro deletado com sucesso!");
       setLivros((prev) => prev.filter((livro) => livro.id !== livroParaEditar.id));
       setLivroParaEditar(null);
     } catch (err) {
       console.error(err);
-      alert("Erro ao deletar livro.");
+      toast.error("Erro ao deletar livro.");
     }
   };
 

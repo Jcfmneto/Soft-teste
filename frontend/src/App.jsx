@@ -4,22 +4,35 @@ import Home from "./pages/Home";
 import AdicionaLivro from "./pages/AdicionarLivros";
 import PrivateRoute from "./components/privateRoute.jsx";
 import NotFound from "./pages/notFound/notFound.jsx";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route
-        path="/home"
-        element={
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
-        }
-      />
-      <Route path="/AdicionarLivros" element={<PrivateRoute> <AdicionaLivro /> </PrivateRoute>} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/AdicionarLivros"
+          element={
+            <PrivateRoute>
+              <AdicionaLivro />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 
