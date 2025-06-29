@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api.js";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
 
 export default function PaginaAdicionarLivro() {
@@ -18,11 +20,11 @@ export default function PaginaAdicionarLivro() {
     e.preventDefault();
     try {
       await api.post("/livros", bookData);
-      alert("Livro criado com sucesso!");
+      toast.success("Livro criado com sucesso!");
       setBookData({ titulo: "", autor: "", descricao: "" });
     } catch (err) {
       console.error(err);
-      alert("Erro ao criar livro.");
+      toast.error("Erro ao criar livro.");
     }
   };
 
@@ -55,13 +57,14 @@ export default function PaginaAdicionarLivro() {
         <input
           type="text"
           name="autor"
-          placeholder="Nome do Autor     "
+          placeholder="Nome do Autor"
           value={bookData.autor}
           onChange={handleChange}
           required
         />
         <button type="submit">Adicionar</button>
       </form>
+      <ToastContainer />
     </div>
   );
 }
