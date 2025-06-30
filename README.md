@@ -53,7 +53,12 @@ docker-compose up
 ```
 A aplicação estará disponível em: http://localhost:5173/
 
-Na página inicial, será necessário fazer o login para acessar o sistema.
+Na página inicial, será necessário fazer login para acessar o sistema.
+Credenciais padrão para acesso:
+
+Usuário: admin
+
+Senha: admin
 
 ---
 
