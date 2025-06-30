@@ -4,6 +4,8 @@ Este é um sistema completo de aluguel de livros desenvolvido com **Node.js** ut
 
 No frontend, foi utilizada a biblioteca **React.js** para criação da interface de usuário, junto com o **Vite** para facilitar e acelerar o desenvolvimento.
 
+[📄 Documentação Funcional (PDF)](docs/documentacao-funcional.pdf)
+
 ---
 
 ## Tecnologias Utilizadas
