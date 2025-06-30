@@ -19,7 +19,7 @@ No frontend, foi utilizada a biblioteca **React.js** para criação da interface
 - ✅ Jest (para testes)  
 - ✅ Vite (bundler e ferramenta de desenvolvimento frontend)  
 - ✅ Docker Compose (orquestração dos containers)  
-
+-  ✅ ESLint (para padronização e organização do código)
 ---
 
 ## Funcionalidades
