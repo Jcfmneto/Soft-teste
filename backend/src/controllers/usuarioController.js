@@ -1,4 +1,4 @@
-import {registraUsuario, login} from "../services/usuarioServices.js";
+import {registraUsuario, login} from "../services/usuarioService.js";
 
 
 
